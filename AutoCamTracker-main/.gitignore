@@ -1,0 +1,17 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+build/
+cmake-build-*/
+*.user
+*.log
+outputs/
+output/
+tmp/
+*.pt
+*.pth
+*.onnx
+*.engine
+*.mlpackage
+*.torchscript

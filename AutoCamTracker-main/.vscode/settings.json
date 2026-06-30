@@ -1,0 +1,5 @@
+{
+  "python.defaultInterpreterPath": "/Users/linen/.pyenv/versions/3.13.0/bin/python",
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.defaultPackageManager": "ms-python.python:conda"
+}

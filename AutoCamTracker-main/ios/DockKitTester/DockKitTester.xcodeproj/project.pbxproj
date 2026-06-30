@@ -1,0 +1,384 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		200000000000000000000001 /* DockKitTesterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000001 /* DockKitTesterApp.swift */; };
+		200000000000000000000002 /* AccessoryStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000002 /* AccessoryStatus.swift */; };
+		200000000000000000000003 /* GimbalCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000003 /* GimbalCommand.swift */; };
+		200000000000000000000004 /* TrackingCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000004 /* TrackingCommand.swift */; };
+		200000000000000000000005 /* AppLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000005 /* AppLogEntry.swift */; };
+		200000000000000000000006 /* GimbalVelocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000006 /* GimbalVelocity.swift */; };
+		200000000000000000000007 /* Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000007 /* Clamp.swift */; };
+		200000000000000000000008 /* JSONDecoder+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000008 /* JSONDecoder+Safe.swift */; };
+		200000000000000000000009 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000009 /* AppLogger.swift */; };
+		20000000000000000000000A /* DockKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000A /* DockKitManager.swift */; };
+		20000000000000000000000B /* GimbalControlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000B /* GimbalControlService.swift */; };
+		20000000000000000000000C /* V13NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000C /* V13NetworkClient.swift */; };
+		20000000000000000000000D /* PermissionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000D /* PermissionService.swift */; };
+		20000000000000000000000E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000E /* ContentView.swift */; };
+		20000000000000000000000F /* StatusPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000F /* StatusPanelView.swift */; };
+		200000000000000000000010 /* ManualControlPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000010 /* ManualControlPadView.swift */; };
+		200000000000000000000011 /* LogConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000011 /* LogConsoleView.swift */; };
+		200000000000000000000012 /* NetworkTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000012 /* NetworkTestView.swift */; };
+		200000000000000000000013 /* CameraSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000013 /* CameraSessionService.swift */; };
+		200000000000000000000014 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000014 /* CameraPreviewView.swift */; };
+		710000000000000000000003 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 700000000000000000000003 /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		100000000000000000000001 /* DockKitTesterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockKitTesterApp.swift; sourceTree = "<group>"; };
+		100000000000000000000002 /* AccessoryStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryStatus.swift; sourceTree = "<group>"; };
+		100000000000000000000003 /* GimbalCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GimbalCommand.swift; sourceTree = "<group>"; };
+		100000000000000000000004 /* TrackingCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingCommand.swift; sourceTree = "<group>"; };
+		100000000000000000000005 /* AppLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogEntry.swift; sourceTree = "<group>"; };
+		100000000000000000000006 /* GimbalVelocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GimbalVelocity.swift; sourceTree = "<group>"; };
+		100000000000000000000007 /* Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamp.swift; sourceTree = "<group>"; };
+		100000000000000000000008 /* JSONDecoder+Safe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Safe.swift"; sourceTree = "<group>"; };
+		100000000000000000000009 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		10000000000000000000000A /* DockKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockKitManager.swift; sourceTree = "<group>"; };
+		10000000000000000000000B /* GimbalControlService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GimbalControlService.swift; sourceTree = "<group>"; };
+		10000000000000000000000C /* V13NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V13NetworkClient.swift; sourceTree = "<group>"; };
+		10000000000000000000000D /* PermissionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionService.swift; sourceTree = "<group>"; };
+		10000000000000000000000E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		10000000000000000000000F /* StatusPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPanelView.swift; sourceTree = "<group>"; };
+		100000000000000000000010 /* ManualControlPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualControlPadView.swift; sourceTree = "<group>"; };
+		100000000000000000000011 /* LogConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogConsoleView.swift; sourceTree = "<group>"; };
+		100000000000000000000012 /* NetworkTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTestView.swift; sourceTree = "<group>"; };
+		100000000000000000000013 /* CameraSessionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSessionService.swift; sourceTree = "<group>"; };
+		100000000000000000000014 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		300000000000000000000002 /* DockKitTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DockKitTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		700000000000000000000001 /* DockKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DockKit.framework; path = System/Library/Frameworks/DockKit.framework; sourceTree = SDKROOT; };
+		700000000000000000000002 /* Spatial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spatial.framework; path = System/Library/Frameworks/Spatial.framework; sourceTree = SDKROOT; };
+		700000000000000000000003 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		400000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				710000000000000000000003 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A00000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000005 /* DockKitTester */,
+				A00000000000000000000004 /* Frameworks */,
+				A00000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A00000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				300000000000000000000002 /* DockKitTester.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000004 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				700000000000000000000001 /* DockKit.framework */,
+				700000000000000000000002 /* Spatial.framework */,
+				700000000000000000000003 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000005 /* DockKitTester */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000006 /* App */,
+				A00000000000000000000007 /* Core */,
+				A0000000000000000000000A /* Services */,
+				A0000000000000000000000B /* UI */,
+			);
+			path = DockKitTester;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000006 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000001 /* DockKitTesterApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000007 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000008 /* Models */,
+				A00000000000000000000009 /* Utilities */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000008 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000002 /* AccessoryStatus.swift */,
+				100000000000000000000003 /* GimbalCommand.swift */,
+				100000000000000000000004 /* TrackingCommand.swift */,
+				100000000000000000000005 /* AppLogEntry.swift */,
+				100000000000000000000006 /* GimbalVelocity.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A00000000000000000000009 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000007 /* Clamp.swift */,
+				100000000000000000000008 /* JSONDecoder+Safe.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A0000000000000000000000A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000013 /* CameraSessionService.swift */,
+				100000000000000000000009 /* AppLogger.swift */,
+				10000000000000000000000A /* DockKitManager.swift */,
+				10000000000000000000000B /* GimbalControlService.swift */,
+				10000000000000000000000C /* V13NetworkClient.swift */,
+				10000000000000000000000D /* PermissionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A0000000000000000000000B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000014 /* CameraPreviewView.swift */,
+				10000000000000000000000E /* ContentView.swift */,
+				10000000000000000000000F /* StatusPanelView.swift */,
+				100000000000000000000010 /* ManualControlPadView.swift */,
+				100000000000000000000011 /* LogConsoleView.swift */,
+				100000000000000000000012 /* NetworkTestView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		300000000000000000000001 /* DockKitTester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 500000000000000000000002 /* Build configuration list for PBXNativeTarget "DockKitTester" */;
+			buildPhases = (
+				400000000000000000000001 /* Sources */,
+				400000000000000000000002 /* Frameworks */,
+				400000000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DockKitTester;
+			productName = DockKitTester;
+			productReference = 300000000000000000000002 /* DockKitTester.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					300000000000000000000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = 500000000000000000000001 /* Build configuration list for PBXProject "DockKitTester" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A00000000000000000000002;
+			productRefGroup = A00000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				300000000000000000000001 /* DockKitTester */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		400000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		400000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				200000000000000000000001 /* DockKitTesterApp.swift in Sources */,
+				200000000000000000000002 /* AccessoryStatus.swift in Sources */,
+				200000000000000000000003 /* GimbalCommand.swift in Sources */,
+				200000000000000000000004 /* TrackingCommand.swift in Sources */,
+				200000000000000000000005 /* AppLogEntry.swift in Sources */,
+				200000000000000000000006 /* GimbalVelocity.swift in Sources */,
+				200000000000000000000007 /* Clamp.swift in Sources */,
+				200000000000000000000008 /* JSONDecoder+Safe.swift in Sources */,
+				200000000000000000000009 /* AppLogger.swift in Sources */,
+				20000000000000000000000A /* DockKitManager.swift in Sources */,
+				20000000000000000000000B /* GimbalControlService.swift in Sources */,
+				20000000000000000000000C /* V13NetworkClient.swift in Sources */,
+				20000000000000000000000D /* PermissionService.swift in Sources */,
+				20000000000000000000000E /* ContentView.swift in Sources */,
+				20000000000000000000000F /* StatusPanelView.swift in Sources */,
+				200000000000000000000010 /* ManualControlPadView.swift in Sources */,
+				200000000000000000000011 /* LogConsoleView.swift in Sources */,
+				200000000000000000000012 /* NetworkTestView.swift in Sources */,
+				200000000000000000000013 /* CameraSessionService.swift in Sources */,
+				200000000000000000000014 /* CameraPreviewView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		600000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		600000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		600000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1740;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AutoCam V1.75";
+				INFOPLIST_KEY_NSAppTransportSecurity_NSAllowsLocalNetworking = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "DockKit Tester uses the rear camera to activate DockKit tracking and test the connected gimbal.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access receives AutoCamTracker V1.75 tracking commands from your computer.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is reserved for future camera recording tests.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.75;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.DockKitTester;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		600000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1740;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "AutoCam V1.75";
+				INFOPLIST_KEY_NSAppTransportSecurity_NSAllowsLocalNetworking = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "DockKit Tester uses the rear camera to activate DockKit tracking and test the connected gimbal.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access receives AutoCamTracker V1.75 tracking commands from your computer.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access is reserved for future camera recording tests.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.75;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.DockKitTester;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		500000000000000000000001 /* Build configuration list for PBXProject "DockKitTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				600000000000000000000001 /* Debug */,
+				600000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		500000000000000000000002 /* Build configuration list for PBXNativeTarget "DockKitTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				600000000000000000000003 /* Debug */,
+				600000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A00000000000000000000001 /* Project object */;
+}

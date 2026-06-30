@@ -1,0 +1,9 @@
+ultralytics==8.4.64
+filterpy==1.4.5
+mss==10.2.0
+opencv-python==4.13.0.92
+pillow==12.2.0
+yt-dlp>=2024.8.6
+onnx>=1.21.0
+onnxruntime>=1.26.0
+websockets<17.0,>=13.0
