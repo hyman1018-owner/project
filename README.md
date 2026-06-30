@@ -1,1 +1,162 @@
-# project
+# AutoCamTracker V1.75
+
+AutoCamTracker 是一個以影片、螢幕區域、webcam 或 iPhone 作為輸入的車輛偵測、單車追蹤、數位構圖與 GID 重新辨識工具。V1.75 加入可實際回到相對姿態的 DockKit Home、失追 zoom 保持與緩退、12 幀自信度衰減 coasting、彎道更快的雲台前饋與動態平滑，以及完整 1.75 iOS / desktop 版本同步。
+
+## 功能簡述
+
+- 支援 `webcam`、`video_file`、`video_url`、`screen_region` 與 `iphone` 相機串流。
+- 預設 High FPS profile 使用 `code/model/yolo26n.pt` + `bytetrack`，以 30 FPS iPhone 串流為目標。
+- Balanced ID profile 可切回 `code/model/yolo26s.pt` + `botsort` + tracker ReID。
+- 預設 Identity ReID 模型為 `code/model/yolo26s-reid.onnx`。
+- Tracking buffer 依來源 FPS 設定為約 5 秒，降低短暫遮擋或漏檢造成的掉 ID。
+- Before 畫面以紅色數字顯示 GID，選取中的紅框 GID 為 65 px、其他 GID 為 50 px，LID 為 30 px。
+- After 畫面依選定車輛做數位變焦與置中構圖。
+- `GID` 是長期車輛身份，`LID` 是 YOLO / tracker 的短期 local track id。
+- 一般點選 bbox 只會選取目前 LID；再按 `Add Selected Vehicle`，立即建立新的 GID 資料庫欄位。
+- 選取 bbox 與 Identity DB 的 GID row 後，按 `Link BBox → GID` 立即完成綁定。
+- Vehicle Database 使用固定右側欄；Tracking 主區塊可切換 High FPS / Balanced ID profile，ReID 模型、門檻與 Feature Mode 收在可展開的 Advanced ReID settings。
+- `Find GID` 會用該 GID 的 Master features 對目前畫面 detections 做 ReID matching。
+- `Auto ReID Th` 可調整 Find GID / 自動 GID reacquire 的 ReID 相似度門檻。
+- `Auto Add Feature` 可啟動目前 GID 的持續自動 Master feature 採樣。
+- `Manual Add 1 Photo` 會先停止背景自動採樣，每次按下最多只嘗試加入目前 GID 的一張 Master feature。
+- `Auto Add Feature` 僅在目前鏡頭場景內有效；偵測到切鏡後會自動停止，必須再次按下才能在新場景繼續採樣。
+- `Auto Feature Mode` 支援 `Balanced`、`Diverse`、`Strict`：
+  - `Balanced`：一般使用，品質與多樣性平衡。
+  - `Diverse`：更積極收集遠車、近車、不同位置/角度 proxy、太陽/陰影光影差異。
+  - `Strict`：高品質、少量、保守寫入。
+- 自動寫入 Master 前會做防污染檢查：
+  - 如果 GID 已有 Master feature，新增 feature 必須通過 dominant class 檢查。
+  - 新增 feature 必須與該 GID Master features 達到 ReID 分數門檻。
+  - 避免 tracker ID switch 後把錯車寫入同一個 GID。
+- Identity row hover 會顯示該 GID 的第一張 feature crop 預覽。
+- 雙擊 GID 欄位可自訂顯示名稱。
+
+## 專案結構
+
+- `src/autocamtracker/main.py`：目前 V1.75 桌面版 Tkinter app 啟動入口。
+- `src/autocamtracker/ui/app.py`：Tkinter integration shell、視窗標題、核心物件 wiring。
+- `src/autocamtracker/ui/mixins/`：控制列、Before / After 顯示、時間軸、Identity panel 與互動命令。
+- `src/autocamtracker/vision/detector.py`：來源讀取、YOLO 模型載入、偵測與 tracker 串接。
+- `src/autocamtracker/tracking/detection_store.py`：保存目前 detections、track history、候選排序。
+- `src/autocamtracker/tracking/identity_manager.py`：GID / LID 狀態管理、Find GID、自動 reacquire。
+- `src/autocamtracker/tracking/auto_feature_sampler.py`：自動 Master feature 採樣與防污染 gating。
+- `src/autocamtracker/tracking/feature_gallery.py`：Master / Pending / Candidate gallery、ReID matching、crop quality filter。
+- `src/autocamtracker/tracking/reid_embedding.py`：Ultralytics ReID encoder 包裝。
+- `src/autocamtracker/vision/reframer.py`：依目標 bbox 產生數位構圖輸出。
+- `src/autocamtracker/server/websocket_server.py`：V1.75 桌面端與 DockKit iOS app 的 WebSocket bridge。
+- `code/model/`：預設 YOLO / ReID 模型與 tracker 相關資源。
+- `code/V1/`：舊版 V1 目錄，目前主要程式已搬到 `src/autocamtracker/`。
+- `outputs/`：本機執行產生的資料庫、測試影片與暫存輸出。此資料夾不應上傳到 GitHub。
+
+## 安裝與執行
+
+建議使用 Python 3.13 或目前專案相容的 Python 版本。
+
+```bash
+python -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -e .
+.venv/bin/autocamtracker-app
+```
+
+如果你已經有 `.venv`，可直接執行：
+
+```bash
+.venv/bin/autocamtracker-app
+```
+
+若尚未安裝 editable package，也可從專案根目錄用模組入口啟動：
+
+```bash
+PYTHONPATH=src .venv/bin/python -m autocamtracker.main
+```
+
+macOS webcam 若無法開啟，請到 System Settings > Privacy & Security > Camera，允許 Terminal、Visual Studio Code 或啟動 Python 的 app 使用相機，重新開啟終端機後再執行。
+
+## 基本使用流程
+
+1. 在 `Source` 區選擇輸入來源。
+2. 如果使用影片，按 `Browse Video` 選檔；如果使用網址，填入 URL。
+3. 在 `Tracking` 區選擇 Performance profile、模型、tracker 與 framing 模式；預設 High FPS 會用 `yolo26n.pt` + `bytetrack`。
+4. `Playback` 區位於 `Tracking` 下方，可控制 Start / Pause / Stop / Record 與速度。
+5. 按 `Start` 開始偵測。
+6. 在 Before 畫面點選車輛 bbox，再按 `Add Selected Vehicle` 建立 GID。
+7. 需要補綁既有 GID 時，點 bbox、選 Identity DB 的 GID row，再按 `Link BBox → GID`。
+8. 需要用 GID 找回車輛時，選 GID row 後按 `Find GID`。
+9. 需要持續收集特徵時，選 GID row 後按 `Auto Add Feature`，或直接點 bbox 啟動自動採樣；切換鏡頭後需重新啟動。
+10. 需要人工驗證單張特徵時，按 `Manual Add 1 Photo`；照片仍需通過品質與重複檢查。
+11. 使用 `Auto Feature Mode` 決定自動採樣保守程度。
+
+### iPhone / DockKit 連線
+
+1. 安裝依賴與 editable package：`.venv/bin/python -m pip install -r requirements.txt`，接著 `.venv/bin/python -m pip install -e .`。
+2. V1.75 預設選擇 `iphone`，會在 `8765` port 啟動 WebSocket Server 並自動啟動影像管線；畫面會顯示可連線網址與 Copy 按鈕。
+3. iOS App 會使用已保存的 URL 自動連線；需要更換 Mac 時，也可在連線頁輸入 `ws://<Mac 位址>:8765/ws/tracking` 後按 `Connect`。
+4. iOS App 會以最高約 30 FPS 傳送 JPEG 相機畫面給 V1.75；桌面端預設以 YOLO + ByteTrack 低延遲追蹤，GID ReID 僅在 Find GID、掉 LID 或需要重新辨識時介入，再透過相同 WebSocket 回傳 tracking command 與實體相機 `zoom_factor`。
+5. DockKit System Tracking 會由 iOS App 自動關閉，避免手機內建人物追蹤與電腦辨識同時搶控制權。
+
+無線模式要求 Mac 與 iPhone 在可互相存取的同一區域網路。有線 USB-C 模式仍使用相同 WebSocket 協議，但 macOS 與 iOS 必須先透過 Personal Hotspot USB、USB Ethernet 或其他方式建立可互通的 IP 網路介面；單純接上充電線或 Xcode USB deploy 不會自動建立 App 的資料通道。
+
+## V1.75 注意事項
+
+- V1.75 仍以單一車輛追蹤與互動式 GID 管理為主。
+- Set Home 會保存目前累積的相對 yaw / pitch / roll offset；Return Home 會以相對姿態 delta 走回該 Home。
+- target lost 時桌面端會保留最後 locked zoom 約 1 秒，再慢慢 ramp 回 wide，避免畫面瞬間跳回 x1。
+- GID 失追 coasting 延長到 12 幀；前 3 幀維持 confidence，之後逐步衰減並持續輸出 predicted target。
+- iOS 雲台控制會在 predicted target 或 error 加速度升高時降低 smoothing old weight，並用 error delta 加前饋。
+- V1.75 新增 High FPS profile、30 FPS iPhone frame budget、ByteTrack 預設追蹤與可選 Balanced ID BoT-SORT ReID，降低每幀追蹤延遲。
+- V1.75 的 GID reacquire 可暫時鎖定 `LID=None` 的 detection，並使用 NumPy 加速 Master feature gallery 比對。
+- 實體變焦已接到 iOS 相機端；若 telemetry 的 `camera_display_zoom_factor` 仍不動，優先檢查 iOS App 是否為 1.75、是否收到 `zoom_factor`、以及相機硬體可用倍率範圍。
+- `Auto Add Feature` 會寫入 Master gallery；如果 Master 已存在，新增 feature 會先通過 class 與 ReID 防污染檢查。
+- 如果 YOLO / tracker 產生 `LID=None`，V1.75 會先用 visual temporary lock 保持 GID；等 tracker 後續恢復 LID 時再重新綁定。
+- 若 GID 已被舊版本寫入錯車 feature，V1.75 會防止繼續污染，但不會自動清理既有髒資料。
+- Identity DB 是本機資料，預設位於 `outputs/vehicle_identity.sqlite3`，不應作為 release 檔案上傳。
+- `outputs/`、`.venv/`、cache、測試輸出都不屬於乾淨 release 內容。
+
+---
+
+# AutoCamTracker V1.75 English
+
+AutoCamTracker is a vehicle detection, single-target tracking, digital reframing, and GID re-identification tool. V1.75 adds physical iPhone camera zoom control, a 30 FPS iPhone stream, automatic connection and startup, cached and trajectory-gated ReID, safer DockKit control, and racetrack Fixed Cut, AI Tracking, and In/Out Auto shot modes.
+
+## Highlights
+
+- Supports `webcam`, `video_file`, `video_url`, `screen_region`, and `iphone` inputs.
+- Defaults to `code/model/yolo26n.pt` + `bytetrack` in the High FPS profile.
+- Balanced ID can switch back to `code/model/yolo26s.pt` + `botsort` + tracker ReID.
+- Defaults to `code/model/yolo26s-reid.onnx` for Identity ReID.
+- Keeps tracker lost-buffer at about 5 seconds based on source FPS.
+- `GID` is the long-lived vehicle identity; `LID` is the short-lived tracker id.
+- The Before view renders the selected red-box GID at 65 px, other GIDs at 50 px, and the LID at 30 px.
+- Clicking a bbox selects a local track without writing the database; `Add Selected Vehicle` creates a GID explicitly.
+- Select both a bbox and a GID row, then use `Link BBox → GID` to link them immediately.
+- `Find GID` matches current detections against the selected GID's Master gallery.
+- `Auto ReID Th` controls Find GID and automatic reacquire similarity threshold.
+- `Auto Feature Mode` supports `Balanced`, `Diverse`, and `Strict`.
+- `Manual Add 1 Photo` stops background automatic sampling and attempts at most one Master feature per click.
+- Automatic feature capture stops at a detected camera cut and must be started again for the new scene.
+- Automatic Master writes are guarded by dominant class and ReID checks once a GID already has Master features.
+- Hovering an Identity DB row previews that GID's first feature crop.
+
+## Run
+
+```bash
+python -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -e .
+.venv/bin/autocamtracker-app
+```
+
+If dependencies are already installed:
+
+```bash
+.venv/bin/autocamtracker-app
+```
+
+Without an editable install, run the module entry point from the project root:
+
+```bash
+PYTHONPATH=src .venv/bin/python -m autocamtracker.main
+```
+
+Runtime files such as `outputs/vehicle_identity.sqlite3` are local user data and are intentionally excluded from releases.
